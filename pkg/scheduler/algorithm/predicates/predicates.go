@@ -1017,6 +1017,7 @@ func PodFitsHostPorts(pod *v1.Pod, meta algorithm.PredicateMetadata, nodeInfo *s
 
 	// try to see whether existingPorts and  wantPorts will conflict or not
 	if portsConflict(existingPorts, wantPorts) {
+		fmt.Printf(" nodeInfo: %+v ================  existingPorts: %+v ================  wantPorts: %+v ================ podName: %+v\n\n======================\n\n", nodeInfo.Node().Name, existingPorts["0.0.0.0"], wantPorts, pod.Name)
 		return false, []algorithm.PredicateFailureReason{ErrPodNotFitsHostPorts}, nil
 	}
 
