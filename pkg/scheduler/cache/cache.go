@@ -244,6 +244,7 @@ func (cache *schedulerCache) addPod(pod *v1.Pod) {
 
 // Assumes that lock is already acquired.
 func (cache *schedulerCache) updatePod(oldPod, newPod *v1.Pod) error {
+	fmt.Printf("cache.go UPDATE POD %v", pod.Name)
 	if err := cache.removePod(oldPod); err != nil {
 		return err
 	}
