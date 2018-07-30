@@ -232,8 +232,10 @@ func (cache *schedulerCache) ForgetPod(pod *v1.Pod) error {
 
 // Assumes that lock is already acquired.
 func (cache *schedulerCache) addPod(pod *v1.Pod) {
+	fmt.Printf("cache.go ADD POD %v", pod.Name)
 	n, ok := cache.nodes[pod.Spec.NodeName]
 	if !ok {
+		fmt.Printf("cache.go CACHE not ok for %v", pod.Spec.NodeName)
 		n = NewNodeInfo()
 		cache.nodes[pod.Spec.NodeName] = n
 	}
@@ -251,6 +253,7 @@ func (cache *schedulerCache) updatePod(oldPod, newPod *v1.Pod) error {
 
 // Assumes that lock is already acquired.
 func (cache *schedulerCache) removePod(pod *v1.Pod) error {
+	fmt.Printf("cache.go REMOVE POD %v", pod.Name)
 	n := cache.nodes[pod.Spec.NodeName]
 	if err := n.RemovePod(pod); err != nil {
 		return err
