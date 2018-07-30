@@ -440,6 +440,7 @@ func hasPodAffinityConstraints(pod *v1.Pod) bool {
 
 // AddPod adds pod information to this NodeInfo.
 func (n *NodeInfo) AddPod(pod *v1.Pod) {
+	fmt.Printf("===== ADD NEW POD: %v\n", pod.Name)
 	res, non0CPU, non0Mem := calculateResource(pod)
 	n.requestedResource.MilliCPU += res.MilliCPU
 	n.requestedResource.Memory += res.Memory
@@ -465,6 +466,7 @@ func (n *NodeInfo) AddPod(pod *v1.Pod) {
 
 // RemovePod subtracts pod information from this NodeInfo.
 func (n *NodeInfo) RemovePod(pod *v1.Pod) error {
+	fmt.Printf("===== REMOVE OLD POD: %v\n", pod.Name)
 	k1, err := getPodKey(pod)
 	if err != nil {
 		return err
