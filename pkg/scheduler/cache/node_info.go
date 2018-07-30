@@ -539,10 +539,10 @@ func (n *NodeInfo) updateUsedPorts(pod *v1.Pod, add bool) {
 		for k := range container.Ports {
 			podPort := &container.Ports[k]
 			if add {
-				fmt.Printf("===== NODE: %+v ADD TO CACHE NODE PORT: %v\n", n.Node().Name, podPort.HostPort)
+				fmt.Printf("===== NODE: %+v ADD TO CACHE NODE PORT: %v POD: %+v\n", n.Node().Name, podPort.HostPort, pod)
 				n.usedPorts.Add(podPort.HostIP, string(podPort.Protocol), podPort.HostPort)
 			} else {
-				fmt.Printf("===== NODE: %+v REMOVE FROM CACHE NODE PORT: %v\n", n.Node().Name, podPort.HostPort)
+				fmt.Printf("===== NODE: %+v REMOVE FROM CACHE NODE PORT: %v POD: %+v\n", n.Node().Name, podPort.HostPort, pod)
 				n.usedPorts.Remove(podPort.HostIP, string(podPort.Protocol), podPort.HostPort)
 			}
 		}
